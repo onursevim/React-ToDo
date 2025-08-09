@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import './Style.css';
 
 function Register() {
     const navigate = useNavigate();
@@ -27,57 +28,62 @@ function Register() {
     }
 
     return (
-        <div className="min-vh-100 bg-light d-flex align-items-center">
+        <div className="auth-container">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-6 col-lg-5">
-                        <div className="text-center mb-5">
-                            <h1 className="text-dark fw-bold mb-2">Hesap Oluşturun</h1>
-                            <p className="text-muted">Yeni hesabınızı oluşturun</p>
+                        {/* Header Section */}
+                        <div className="auth-header">
+                            <div className="text-center">
+                                <h1 className="auth-title">Hesap Oluşturun</h1>
+                                <p className="auth-subtitle">Yeni hesabınızı oluşturun</p>
+                            </div>
                         </div>
-                        
-                        <div className="card border-0 shadow-lg">
-                            <div className="card-body p-5">
+
+                        {/* Main Card */}
+                        <div className="auth-card">
+                            <div className="auth-card-body">
                                 <form onSubmit={register}>
-                                    <div className="mb-4">
-                                        <label htmlFor="userName" className="form-label fw-medium">Kullanıcı Adı</label>
-                                        <input 
+                                    <div className="form-group">
+                                        <label htmlFor="userName" className="form-label">Kullanıcı Adı</label>
+                                        <input
                                             value={userName}
-                                            onChange={(e)=>setUserName(e.target.value)}
-                                            type="text" 
-                                            id="userName" 
-                                            name="userName" 
-                                            className="form-control form-control-lg border-0 bg-light" 
+                                            onChange={(e) => setUserName(e.target.value)}
+                                            type="text"
+                                            id="userName"
+                                            name="userName"
+                                            className="form-input"
                                             placeholder="Kullanıcı adınızı girin"
                                             required
+                                            autoFocus
                                         />
                                     </div>
-                                    <div className="mb-4">
-                                        <label htmlFor="password" className="form-label fw-medium">Şifre</label>
-                                        <input 
-                                            value={password} 
-                                            onChange={(e) => setPassword(e.target.value)} 
-                                            type="password" 
-                                            id="password" 
-                                            name="password" 
-                                            className="form-control form-control-lg border-0 bg-light" 
+                                    <div className="form-group">
+                                        <label htmlFor="password" className="form-label">Şifre</label>
+                                        <input
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            type="password"
+                                            id="password"
+                                            name="password"
+                                            className="form-input"
                                             placeholder="Şifrenizi girin"
                                             required
                                         />
                                     </div>
                                     {error && (
-                                        <div className="alert alert-danger border-0 mb-4" role="alert">
-                                            <i className="bi bi-exclamation-triangle me-2"></i>
+                                        <div className="error-alert">
+                                            <i className="bi bi-exclamation-triangle"></i>
                                             {error}
                                         </div>
                                     )}
-                                    <button className="btn btn-success btn-lg w-100 mb-4">
-                                        <i className="bi bi-person-plus me-2"></i>
+                                    <button className="auth-submit-btn">
+                                        <i className="bi bi-person-plus"></i>
                                         Kayıt Ol
                                     </button>
-                                    <div className="text-center">
-                                        <Link to="/login" className="text-decoration-none">
-                                            Zaten hesabınız var mı? <span className="text-primary fw-medium">Giriş yapın</span>
+                                    <div className="auth-link-section">
+                                        <Link to="/login" className="auth-link">
+                                            Zaten hesabınız var mı? <span className="auth-link-highlight">Giriş yapın</span>
                                         </Link>
                                     </div>
                                 </form>

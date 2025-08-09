@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import './Style.css';
 
 function Login() {
     const navigate = useNavigate();
@@ -27,57 +28,62 @@ function Login() {
     }
 
     return (
-        <div className="min-vh-100 bg-light d-flex align-items-center">
+        <div className="auth-container">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-6 col-lg-5">
-                        <div className="text-center mb-5">
-                            <h1 className="text-dark fw-bold mb-2">Hoş Geldiniz</h1>
-                            <p className="text-muted">Hesabınıza giriş yapın</p>
+                        {/* Header Section */}
+                        <div className="auth-header">
+                            <div className="text-center">
+                                <h1 className="auth-title">Hoş Geldiniz</h1>
+                                <p className="auth-subtitle">Hesabınıza giriş yapın</p>
+                            </div>
                         </div>
-                        
-                        <div className="card border-0 shadow-lg">
-                            <div className="card-body p-5">
+
+                        {/* Main Card */}
+                        <div className="auth-card">
+                            <div className="auth-card-body">
                                 <form onSubmit={login}>
-                                    <div className="mb-4">
-                                        <label htmlFor="userName" className="form-label fw-medium">Kullanıcı Adı</label>
-                                        <input 
-                                            value={userName} 
-                                            onChange={(e) => setUserName(e.target.value)} 
-                                            type="text" 
-                                            id="userName" 
-                                            name="userName" 
-                                            className="form-control form-control-lg border-0 bg-light" 
+                                    <div className="form-group">
+                                        <label htmlFor="userName" className="form-label">Kullanıcı Adı</label>
+                                        <input
+                                            value={userName}
+                                            onChange={(e) => setUserName(e.target.value)}
+                                            type="text"
+                                            id="userName"
+                                            name="userName"
+                                            className="form-input"
                                             placeholder="Kullanıcı adınızı girin"
                                             required
+                                            autoFocus
                                         />
                                     </div>
-                                    <div className="mb-4">
-                                        <label htmlFor="password" className="form-label fw-medium">Şifre</label>
-                                        <input 
-                                            value={password} 
-                                            onChange={(e) => setPassword(e.target.value)} 
-                                            type="password" 
-                                            id="password" 
-                                            name="password" 
-                                            className="form-control form-control-lg border-0 bg-light" 
+                                    <div className="form-group">
+                                        <label htmlFor="password" className="form-label">Şifre</label>
+                                        <input
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            type="password"
+                                            id="password"
+                                            name="password"
+                                            className="form-input"
                                             placeholder="Şifrenizi girin"
                                             required
                                         />
                                     </div>
                                     {error && (
-                                        <div className="alert alert-danger border-0 mb-4" role="alert">
-                                            <i className="bi bi-exclamation-triangle me-2"></i>
+                                        <div className="error-alert">
+                                            <i className="bi bi-exclamation-triangle"></i>
                                             {error}
                                         </div>
                                     )}
-                                    <button className="btn btn-primary btn-lg w-100 mb-4">
-                                        <i className="bi bi-box-arrow-in-right me-2"></i>
+                                    <button className="auth-submit-btn">
+                                        <i className="bi bi-box-arrow-in-right"></i>
                                         Giriş Yap
                                     </button>
-                                    <div className="text-center">
-                                        <Link to="/register" className="text-decoration-none">
-                                            Hesabınız yok mu? <span className="text-primary fw-medium">Kayıt olun</span>
+                                    <div className="auth-link-section">
+                                        <Link to="/register" className="auth-link">
+                                            Hesabınız yok mu? <span className="auth-link-highlight">Kayıt olun</span>
                                         </Link>
                                     </div>
                                 </form>

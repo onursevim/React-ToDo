@@ -26,14 +26,19 @@ router.post('/todos', async (req, res) => {
     if (!token) return res.status(401).json({ message: 'Token gerekli' });
     
     const user = jwt.verify(token, process.env.JWT_SECRET);
-    const { title } = req.body;
+    const { title, category } = req.body;
     
     if (!title || title.trim() === '') {
       return res.status(400).json({ message: 'Todo başlığı gerekli' });
     }
 
+    if (!category || category.trim() === '') {
+      return res.status(400).json({ message: 'Kategori gerekli' });
+    }
+
     const newTodo = new Todo({
       title: title.trim(),
+      category: category.trim(),
       userId: user.userId
     });
 
