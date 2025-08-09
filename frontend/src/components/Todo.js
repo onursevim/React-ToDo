@@ -8,6 +8,7 @@ function Todo() {
     const user = JSON.parse(localStorage.getItem('user'));
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
+    const [description, setDescription] = useState("");
     const [todos, setTodos] = useState([]);
     const [error, setError] = useState("");
     const [showModal, setShowModal] = useState(false);
@@ -65,7 +66,8 @@ function Todo() {
             await axios.post('http://localhost:5000/api/todos',
                 { 
                     title: title.trim(),
-                    category: category
+                    category: category,
+                    description: description.trim()
                 },
                 {
                     headers: {
@@ -75,6 +77,7 @@ function Todo() {
             );
             setTitle("");
             setCategory("");
+            setDescription("");
             setShowModal(false);
             getList(); // Listeyi yenile
         } catch (error) {
@@ -211,6 +214,11 @@ function Todo() {
                                                         </span>
                                                     )}
                                                 </div>
+                                                {todo.description && (
+                                                    <div className="todo-description">
+                                                        <p className="description-text">{todo.description}</p>
+                                                    </div>
+                                                )}
                                                 <div className="todo-dates">
                                                     <div className="date-item">
                                                         <i className="bi bi-calendar-plus"></i>
@@ -271,6 +279,7 @@ function Todo() {
                                     setShowModal(false);
                                     setTitle("");
                                     setCategory("");
+                                    setDescription("");
                                 }}
                             >
                                 <i className="bi bi-x-lg"></i>
@@ -307,6 +316,17 @@ function Todo() {
                                         ))}
                                     </select>
                                 </div>
+                                <div className="form-group">
+                                    <label htmlFor="todoDescription" className="form-label">Açıklama (Opsiyonel)</label>
+                                    <textarea
+                                        className="form-textarea"
+                                        id="todoDescription"
+                                        value={description}
+                                        onChange={(e) => setDescription(e.target.value)}
+                                        rows="3"
+                                        placeholder="Göreviniz hakkında ek bilgi girin..."
+                                    ></textarea>
+                                </div>
                             </div>
                             <div className="custom-modal-footer">
                                 <button
@@ -316,6 +336,7 @@ function Todo() {
                                         setShowModal(false);
                                         setTitle("");
                                         setCategory("");
+                                        setDescription("");
                                     }}
                                 >
                                     İptal

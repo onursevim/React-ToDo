@@ -9,7 +9,10 @@ const todoSchema = new mongoose.Schema({
   category:{
     type:String,
     required:true,
-    trim:true
+  },
+  description:{
+    type:String,
+    required:false
   },
   completed: {
     type: Boolean,
